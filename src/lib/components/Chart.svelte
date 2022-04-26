@@ -6,10 +6,38 @@
 	export function getChartContext() {
 		return getContext(key);
 	}
+
+	let _observer;
+	let callbacks = new WeakMap();
+
+	function observe(node, callback) {
+		callbacks.set(node, callback);
+
+		if (!_observer) {
+			_observer = new ResizeObserver((entries) => {
+				entries.forEach(entry => {
+					let target = entry.target;
+					let targetCb = callbacks.get(target);
+					if (targetCb) {
+						targetCb(entry.target.clientWidth, entry.target.clientHeight);
+					}
+				});
+			});
+		}
+
+		_observer.observe(node);
+
+		return {
+			destroy () {
+				callbacks.delete(node);
+				_observer.unobserve(node);
+			}
+		}
+	}
 </script>
 
 <script>
-	import { setContext, onDestroy } from 'svelte';
+	import { setContext } from 'svelte';
 	import { writable, derived } from 'svelte/store';
 	import * as yootils from 'yootils';
 
@@ -26,8 +54,8 @@
 	const _x2 = writable();
 	const _y2 = writable();
 
-	const width = writable();
-	const height = writable();
+	const width = writable(0);
+	const height = writable(0);
 	const pointer = writable(null);
 
 	const handle_mousemove = e => {
@@ -74,16 +102,20 @@
 		width,
 		height
 	});
+
+	function onResize(clientWidth, clientHeight) {
+		width.set(clientWidth);
+		height.set(clientHeight);
+	}
 </script>
 
 <div
 	class="pancake-chart"
 	bind:this={chart}
-	bind:clientWidth={$width}
-	bind:clientHeight={$height}
 	on:mousemove={handle_mousemove}
 	on:mouseleave={handle_mouseleave}
 	class:clip
+	use:observe={onResize}
 >
 	<slot></slot>
 </div>
