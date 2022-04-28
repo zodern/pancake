@@ -1,5 +1,9 @@
 # @sveltejs/pancake changelog
 
+## 0.0.20
+
+* Fix publishing 0.0.19
+
 ## 0.0.19
 
 * Use resize observer for chart's size
