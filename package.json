@@ -1,6 +1,6 @@
 {
-	"name": "@sveltejs/pancake",
-	"version": "0.0.18",
+	"name": "@zodern/pancake-charts",
+	"version": "0.0.19",
 	"description": "Experimental charting library for Svelte",
 	"scripts": {
 		"dev": "svelte-kit dev",
@@ -12,7 +12,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/Rich-Harris/pancake.git"
+		"url": "git+ssh://git@github.com/zodern/pancake.git"
 	},
 	"keywords": [
 		"svelte",
@@ -23,9 +23,9 @@
 	"author": "Rich Harris",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/Rich-Harris/pancake/issues"
+		"url": "https://github.com/zodern/pancake/issues"
 	},
-	"homepage": "https://github.com/Rich-Harris/pancake#readme",
+	"homepage": "https://github.com/zodern/pancake#readme",
 	"dependencies": {
 		"yootils": "0.3.1"
 	},

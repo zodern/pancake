@@ -1,5 +1,11 @@
 # @sveltejs/pancake changelog
 
+## 0.0.19
+
+* Use resize observer for chart's size
+* Fix error when handling mouse move event and chart is undefined
+* Add types
+
 ## 0.0.18
 
 * Prevent infinite recursion when building quadtree
