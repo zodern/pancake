@@ -59,6 +59,11 @@
 	const pointer = writable(null);
 
 	const handle_mousemove = e => {
+		// Sometimes handle_mousemove is called before chart is given a value
+		if (!chart) {
+			return;
+		}
+
 		const bcr = chart.getBoundingClientRect();
 		const left = e.clientX - bcr.left;
 		const top = e.clientY - bcr.top;
